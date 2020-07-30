@@ -1,0 +1,61 @@
+{
+  "info": {
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_postman_id": "a686707b-2884-4af3-9364-fa6cfddc9f81",
+    "name": "smart-doc    2020-07-29 12:17:55"
+  },
+  "item": [
+    {
+      "name": "未设置接口名称",
+      "item": [
+        {
+          "name": "未设置接口名称",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "p0",
+                  "type": "text",
+                  "desc": "No comments found.",
+                  "value": "kwowmq"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/qdoc/example/path0?p0\u003dkwowmq",
+            "description": "",
+            "header": []
+          },
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "未设置接口名称",
+      "item": [
+        {
+          "name": "未设置接口名称",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "p0",
+                  "type": "text",
+                  "desc": "No comments found.",
+                  "value": "g4a8gq"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/qdoc/example/path0?p0\u003dg4a8gq",
+            "description": "",
+            "header": []
+          },
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

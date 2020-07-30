@@ -59,6 +59,7 @@ public class QdoxTest2 {
         List<JavaAnnotation> classAnnotations = cls.getAnnotations();
         for (JavaAnnotation annotation : classAnnotations) {
             String name = annotation.getType().getValue();
+            System.out.println("++++++++++++annotation:" + name);
             if (SpringMvcAnnotations.CONTROLLER.equals(name) || SpringMvcAnnotations.REST_CONTROLLER.equals(name)) {
                 return true;
             }
@@ -67,6 +68,7 @@ public class QdoxTest2 {
         List<DocletTag> docletTags = cls.getTags();
         for (DocletTag docletTag : docletTags) {
             String value = docletTag.getName();
+            System.out.println("------------docletTags:" + value);
             if (DocTags.REST_API.equals(value)) {
                 return true;
             }

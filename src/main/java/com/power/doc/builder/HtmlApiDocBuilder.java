@@ -28,10 +28,7 @@ import com.power.common.util.FileUtil;
 import com.power.doc.constants.DocGlobalConstants;
 import com.power.doc.constants.DocLanguage;
 import com.power.doc.constants.TemplateVariable;
-import com.power.doc.model.ApiConfig;
-import com.power.doc.model.ApiDoc;
-import com.power.doc.model.ApiDocDict;
-import com.power.doc.model.ApiErrorCode;
+import com.power.doc.model.*;
 import com.power.doc.template.IDocBuildTemplate;
 import com.power.doc.template.SpringBootDocBuildTemplate;
 import com.power.doc.utils.BeetlTemplateUtil;
@@ -77,10 +74,16 @@ public class HtmlApiDocBuilder {
         ProjectDocConfigBuilder configBuilder = new ProjectDocConfigBuilder(config, javaProjectBuilder);
         IDocBuildTemplate docBuildTemplate = new SpringBootDocBuildTemplate();
         List<ApiDoc> apiDocList = docBuildTemplate.getApiData(configBuilder);
+        for (ApiDoc apidoc : apiDocList) {
+            System.out.println(apidoc.getName());
+            for (ApiMethodDoc apiMethodDoc : apidoc.getList()) {
+                System.out.println(apiMethodDoc.getUrl());
+            }
+        }
         if (config.isAllInOne()) {
             Template indexCssTemplate = BeetlTemplateUtil.getByName(ALL_IN_ONE_CSS);
             FileUtil.nioWriteFile(indexCssTemplate.render(), config.getOutPath() + FILE_SEPARATOR + ALL_IN_ONE_CSS);
-            if(StringUtils.isNotEmpty(config.getAllInOneDocFileName())){
+            if (StringUtils.isNotEmpty(config.getAllInOneDocFileName())) {
                 INDEX_HTML = config.getAllInOneDocFileName();
             }
             builderTemplate.buildAllInOne(apiDocList, config, javaProjectBuilder, ALL_IN_ONE_HTML_TPL, INDEX_HTML);

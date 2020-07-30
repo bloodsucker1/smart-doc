@@ -98,9 +98,9 @@ public class DocBuilderTemplate extends BaseDocBuilderTemplate {
         String strTime = DateTimeUtil.long2Str(now, DateTimeUtil.DATE_FORMAT_SECOND);
         FileUtil.mkdirs(outPath);
         List<ApiErrorCode> errorCodeList = errorCodeDictToList(config);
-
         Template tpl = BeetlTemplateUtil.getByName(template);
         tpl.binding(TemplateVariable.API_DOC_LIST.getVariable(), apiDocList);
+        tpl.binding(TemplateVariable.SERVICE_DOC_DEFINE.getVariable(),apiDocList.get(0).getList().get(0).getServiceDocDefine());
         tpl.binding(TemplateVariable.ERROR_CODE_LIST.getVariable(), errorCodeList);
         tpl.binding(TemplateVariable.VERSION_LIST.getVariable(), config.getRevisionLogs());
         tpl.binding(TemplateVariable.VERSION.getVariable(), now);

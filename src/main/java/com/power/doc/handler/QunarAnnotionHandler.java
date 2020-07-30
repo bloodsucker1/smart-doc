@@ -1,5 +1,9 @@
 package com.power.doc.handler;
 
+import com.power.common.util.StringUtil;
+import com.power.doc.model.qunar.ServiceDocModel;
+import com.thoughtworks.qdox.model.JavaAnnotation;
+
 /**
  * QunarAnnotationHandler
  *
@@ -8,4 +12,12 @@ package com.power.doc.handler;
  **/
 public class QunarAnnotionHandler {
 
+    public ServiceDocModel serviceDocHandler(JavaAnnotation annotation) {
+        ServiceDocModel serviceDocModel = new ServiceDocModel();
+        serviceDocModel.setDefine(StringUtil.trimBlank(String.valueOf(annotation.getNamedParameter("define"))));
+        serviceDocModel.setDesc(StringUtil.trimBlank(String.valueOf(annotation.getNamedParameter("desc"))));
+        serviceDocModel.setScene(StringUtil.trimBlank(String.valueOf(annotation.getNamedParameter("scene"))));
+        serviceDocModel.setNotice(StringUtil.trimBlank(String.valueOf(annotation.getNamedParameter("notice"))));
+        return serviceDocModel;
+    }
 }

@@ -54,4 +54,16 @@ public interface DocTags {
      * custom @api tag
      */
     String REST_API = "restApi";
+
+    /**
+     * custom @QServiceDoc tag
+     */
+    String Q_Service_Doc = "QServiceDoc";
+
+    /**
+     * custom @QInterfaceDoc tag
+     */
+    String Q_Interface_Doc = "QInterfaceDoc";
+
+
 }

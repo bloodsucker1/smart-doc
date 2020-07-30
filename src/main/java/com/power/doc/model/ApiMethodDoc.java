@@ -62,6 +62,21 @@ public class ApiMethodDoc implements Serializable {
      */
     private String desc;
 
+
+    public String getServiceDocDefine() {
+        return serviceDocDefine;
+    }
+
+    public void setServiceDocDefine(String serviceDocDefine) {
+        this.serviceDocDefine = serviceDocDefine;
+    }
+
+    /**
+     * method description
+     */
+    private String serviceDocDefine;
+
+
     /**
      * detailed introduction of the method
      */

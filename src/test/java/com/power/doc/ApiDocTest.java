@@ -1,14 +1,10 @@
 package com.power.doc;
 
 import com.power.common.util.DateTimeUtil;
-import com.power.doc.builder.HtmlApiDocBuilder;
-import com.power.doc.builder.PostmanJsonBuilder;
-import com.power.doc.enums.OrderEnum;
-import com.power.doc.model.*;
+import com.power.doc.builder.OpenApiBuilder;
+import com.power.doc.model.ApiConfig;
+import com.power.doc.model.SourceCodePath;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Description:
@@ -34,14 +30,15 @@ public class ApiDocTest {
         config.setOutPath("/Users/llnn/project_java/smart-doc/tmp");
         config.setMd5EncryptedHtmlName(true);
         config.setSourceCodePaths(
-               SourceCodePath.path().setDesc("本项目代码").setPath("/Users/llnn/project_java/smart-doc-demo/src/main/java")
+//                SourceCodePath.path().setDesc("本项目代码").setPath("/Users/llnn/Desktop/QDoc/qdoc-example/src/main/java")
+                SourceCodePath.path().setDesc("本项目代码").setPath("/Users/llnn/project_java/smart-doc-demo/src/main/java")
         );
         //不指定SourcePaths默认加载代码为项目src/main/java下的
 //        config.setSourceCodePaths(
 //                SourceCodePath.path().setDesc("本项目代码").setPath("C:\\Users\\xingzi\\Desktop\\smart\\api-doc-test\\src\\main\\java\\com\\power\\doc")
 
-                //SourcePath.path().setPath("F:\\Personal\\project\\smart\\src\\main\\java")
-                //SourcePath.path().setDesc("加载项目外代码").setPath("E:\\ApplicationPower\\ApplicationPower\\Common-util\\src\\main\\java")
+        //SourcePath.path().setPath("F:\\Personal\\project\\smart\\src\\main\\java")
+        //SourcePath.path().setDesc("加载项目外代码").setPath("E:\\ApplicationPower\\ApplicationPower\\Common-util\\src\\main\\java")
 //        );
 //        config.setDataDictionaries(
 //                ApiDataDictionary.dict().setTitle("订单字典").setEnumClass(OrderEnum.class).setCodeField("code").setDescField("desc")
@@ -68,7 +65,9 @@ public class ApiDocTest {
 
 
         long start = System.currentTimeMillis();
-        HtmlApiDocBuilder.buildApiDoc(config);
+//        HtmlApiDocBuilder.buildApiDoc(config);
+        OpenApiBuilder.buildPostmanCollection(config);
+
         long end = System.currentTimeMillis();
         DateTimeUtil.printRunTime(end, start);
     }

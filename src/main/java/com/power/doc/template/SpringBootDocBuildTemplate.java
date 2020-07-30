@@ -28,12 +28,14 @@ import com.power.common.util.StringUtil;
 import com.power.common.util.UrlUtil;
 import com.power.doc.builder.ProjectDocConfigBuilder;
 import com.power.doc.constants.*;
+import com.power.doc.handler.QunarAnnotionHandler;
 import com.power.doc.handler.SpringMVCRequestHeaderHandler;
 import com.power.doc.handler.SpringMVCRequestMappingHandler;
 import com.power.doc.helper.FormDataBuildHelper;
 import com.power.doc.helper.JsonBuildHelper;
 import com.power.doc.helper.ParamsBuildHelper;
 import com.power.doc.model.*;
+import com.power.doc.model.qunar.ServiceDocModel;
 import com.power.doc.model.request.ApiRequestExample;
 import com.power.doc.model.request.RequestMapping;
 import com.power.doc.utils.DocClassUtil;
@@ -108,12 +110,17 @@ public class SpringBootDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
         List<JavaAnnotation> classAnnotations = cls.getAnnotations();
         Map<String, String> constantsMap = projectBuilder.getConstantsMap();
         String baseUrl = "";
+        ServiceDocModel serviceDocModel = new ServiceDocModel();
         for (JavaAnnotation annotation : classAnnotations) {
             String annotationName = annotation.getType().getValue();
             if (DocAnnotationConstants.REQUEST_MAPPING.equals(annotationName) || DocGlobalConstants.REQUEST_MAPPING_FULLY.equals(annotationName)) {
                 if (annotation.getNamedParameter("value") != null) {
                     baseUrl = StringUtil.removeQuotes(annotation.getNamedParameter("value").toString());
                 }
+            }
+            if (QunarAnnotationConstans.Q_SERVICE_DOC.equals(annotationName)) {
+                serviceDocModel = new QunarAnnotionHandler().serviceDocHandler(annotation);
+                System.out.println(serviceDocModel);
             }
         }
         List<JavaMethod> methods = cls.getMethods();
@@ -129,6 +136,7 @@ public class SpringBootDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
             methodOrder++;
             ApiMethodDoc apiMethodDoc = new ApiMethodDoc();
             apiMethodDoc.setOrder(methodOrder);
+            apiMethodDoc.setServiceDocDefine(serviceDocModel.getDefine());
             apiMethodDoc.setDesc(method.getComment());
             apiMethodDoc.setName(method.getName());
             String methodUid = DocUtil.generateId(clazName + method.getName());
